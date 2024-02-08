@@ -133,11 +133,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Trace\LineTrace.cpp" />
+    <ClCompile Include="src\Render\Object.cpp" />
     <ClCompile Include="src\Shaders\Shader.cpp" />
     <ClCompile Include="src\Render\Player.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Trace\LineTrace.h" />
+    <ClInclude Include="src\Render\Object.h" />
     <ClInclude Include="src\Shaders\Shader.h" />
     <ClInclude Include="src\Render\Player.h" />
     <ClInclude Include="src\external\config.h" />

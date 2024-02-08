@@ -1,5 +1,6 @@
 #include"Render/Player.h"
 #include"Shaders/Shader.h"
+#include"Render/Object.h"
 
 int main(void)
 {
@@ -23,7 +24,9 @@ int main(void)
         return -1;
 
     Player player;
+    Object object(glm::vec3(0.7f,0.7f,0.0f));
     Shader shader("src/Shaders/default_vertex.vert", "src/Shaders/default_fragment.frag");
+
    
     while (!glfwWindowShouldClose(window))
     {  
@@ -31,7 +34,9 @@ int main(void)
 
         shader.use();
         player.Input(window);
+        player.update();
         player.Draw(shader.program);
+        object.Draw(shader.program);
         
 
         glfwSwapBuffers(window);      

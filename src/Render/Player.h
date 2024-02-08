@@ -1,4 +1,4 @@
-#include"..\external\config.h"
+#include"..\Trace\LineTrace.h"
 
 class Player
 {
@@ -9,12 +9,16 @@ public:
 
 	void Draw(unsigned int program);
 	void Input(GLFWwindow* window);
+	void update();
 
 public:
+	LineTrace* trace;
+
 	glm::vec3 position = { 0.0f,0.0f,0.0f };
 	glm::mat4 playerMatrix = glm::mat4(1.0f);
 	glm::vec3 movement = glm::vec3(0.0f);
-	float rayTraceDistance;
+	glm::vec3 angles = glm::vec3(0.0f);
+
 	float speed = 0.02f;
 	unsigned int  VBO, VAO;
 
