@@ -44,32 +44,30 @@ void Player::Input(GLFWwindow* window)
 	{
 		position.y += speed*0.005f;
 		movement.y += speed * 0.005f;
-	
-		playerMatrix = glm::translate(playerMatrix, movement);
-		trace->update(this->position, this->movement,angles);
+
+		trace->update(this->position,angles);
 	}
 	if (glfwGetKey(window, GLFW_KEY_S) > 0)
 	{
 		position.y -= speed * 0.005f;
 		movement.y -= speed * 0.005f;
 	
-		playerMatrix = glm::translate(playerMatrix, movement);
-		trace->update(this->position, this->movement,angles);
+		trace->update(this->position,angles);
 	}
 	if (glfwGetKey(window, GLFW_KEY_D) > 0)
 	{
 		position.x += speed * 0.005f;
 		movement.x += speed * 0.005f;
 
-		playerMatrix = glm::translate(playerMatrix, movement);
-		trace->update(this->position, this->movement,angles);
+		
+		trace->update(this->position, angles);
 	}
 	if (glfwGetKey(window, GLFW_KEY_A) > 0)
 	{
 		position.x -= speed * 0.005f;
 		movement.x -= speed * 0.005f;
-		playerMatrix = glm::translate(playerMatrix, movement);
-		trace->update(this->position, this->movement,angles);
+
+		trace->update(this->position, angles);
 	}
 
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
@@ -91,9 +89,13 @@ void Player::Input(GLFWwindow* window)
 		angles.x = rotX;
 		angles.y = rotY;
 	}
+
+	playerMatrix = glm::translate(playerMatrix, movement);
+	movement = glm::vec3(0.0f);
 }
 
-void Player::update()
+void Player::update(glm::vec3 position)
 {
-	trace->update(this->position, this->movement,angles);
+	trace->update(this->position, this->angles);
+	trace->isLineTrace(position);
 }

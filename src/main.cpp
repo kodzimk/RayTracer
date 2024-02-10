@@ -35,7 +35,7 @@ int main(void)
 
         shader.use();
         player.Input(window);
-        player.update();
+        player.update(object.position);
         player.Draw(shader.program);
         object.Draw(shader.program);
         

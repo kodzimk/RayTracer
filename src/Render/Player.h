@@ -9,7 +9,7 @@ public:
 
 	void Draw(unsigned int program);
 	void Input(GLFWwindow* window);
-	void update();
+	void update(glm::vec3 position);
 
 public:
 	LineTrace* trace;
