@@ -19,6 +19,7 @@ int main(void)
 
     
     glfwMakeContextCurrent(window);
+    glfwSetMouseButtonCallback(window, NULL);
 
     if (glewInit() != GLEW_OK)
         return -1;

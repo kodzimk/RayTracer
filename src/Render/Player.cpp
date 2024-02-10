@@ -3,11 +3,12 @@
 Player::Player()
 {
 	trace = new LineTrace(5.f,this->position);
-	
+	height = 480;
+	width = 640;
 
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
-	s
+	
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
@@ -45,7 +46,7 @@ void Player::Input(GLFWwindow* window)
 		movement.y += speed * 0.005f;
 	
 		playerMatrix = glm::translate(playerMatrix, movement);
-		trace->update(this->position, this->movement);
+		trace->update(this->position, this->movement,angles);
 	}
 	if (glfwGetKey(window, GLFW_KEY_S) > 0)
 	{
@@ -53,7 +54,7 @@ void Player::Input(GLFWwindow* window)
 		movement.y -= speed * 0.005f;
 	
 		playerMatrix = glm::translate(playerMatrix, movement);
-		trace->update(this->position, this->movement);
+		trace->update(this->position, this->movement,angles);
 	}
 	if (glfwGetKey(window, GLFW_KEY_D) > 0)
 	{
@@ -61,19 +62,38 @@ void Player::Input(GLFWwindow* window)
 		movement.x += speed * 0.005f;
 
 		playerMatrix = glm::translate(playerMatrix, movement);
-		trace->update(this->position, this->movement);
+		trace->update(this->position, this->movement,angles);
 	}
 	if (glfwGetKey(window, GLFW_KEY_A) > 0)
 	{
 		position.x -= speed * 0.005f;
 		movement.x -= speed * 0.005f;
 		playerMatrix = glm::translate(playerMatrix, movement);
-		trace->update(this->position, this->movement);
+		trace->update(this->position, this->movement,angles);
 	}
 
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+	{
+		// Hides mouse cursor
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+
+		double mouseX;
+		double mouseY;
+		// Fetches the coordinates of the cursor
+		glfwGetCursorPos(window, &mouseX, &mouseY);
+
+		// Normalizes and shifts the coordinates of the cursor such that they begin in the middle of the screen
+		// and then "transforms" them into degrees 
+		float rotX = sensitivity * mouseX;
+		float rotY = sensitivity * mouseY;
+
+
+		angles.x = rotX;
+		angles.y = rotY;
+	}
 }
 
 void Player::update()
 {
-	trace->update(this->position, this->movement);
+	trace->update(this->position, this->movement,angles);
 }

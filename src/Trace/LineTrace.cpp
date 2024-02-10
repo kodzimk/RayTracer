@@ -21,8 +21,7 @@ LineTrace::LineTrace(float length,glm::vec3 position)
 
 	matrix = glm::mat4(1.0f);
 	matrix = glm::translate(matrix, glm::vec3(position.x + 0.2f/scale.x, position.y + 0.2f/scale.y, position.z));
-	this->position = glm::vec3(position.x + 0.2f, position.y + 0.2f, position.z);
-
+	this->position = glm::vec3(position.x + 0.2f / scale.x, position.y + 0.2f / scale.y, position.z);
 
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -50,12 +49,19 @@ LineTrace::~LineTrace()
 	glDeleteVertexArrays(1, &VAO);
 }
 
-void LineTrace::update(glm::vec3 position, glm::vec3& movement)
+void LineTrace::update(glm::vec3 position, glm::vec3& movement,glm::vec3& rotation)
 {
-	
 	this->position = glm::vec3(this->position.x + movement.x, this->position.y + movement.y, position.z);
 
-	matrix = glm::translate(matrix, movement);
+	if (rotation.x != 0.0f || rotation.y != 0.0f)
+	{
+
+	}
+
+	matrix = glm::mat4(1.0f);
+	matrix = glm::translate(matrix, position);
+	matrix = glm::rotate(matrix, rotation.x, glm::vec3(0.0f, 0.0f, 1.0f));
+
 	movement = glm::vec3(0.0f);
 }
 

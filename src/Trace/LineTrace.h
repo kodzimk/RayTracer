@@ -8,7 +8,7 @@ public:
 	~LineTrace();
 
 	void Draw(unsigned int program);
-	void update(glm::vec3 position, glm::vec3& moveement);
+	void update(glm::vec3 position, glm::vec3& moveement,glm::vec3& rotation);
 
 public:
 

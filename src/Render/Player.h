@@ -20,6 +20,8 @@ public:
 	glm::vec3 angles = glm::vec3(0.0f);
 
 	float speed = 0.02f;
+	float sensitivity = 0.005f;
+	float height, width;
 	unsigned int  VBO, VAO;
 
 	float plane[12] = {
